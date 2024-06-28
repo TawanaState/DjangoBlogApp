@@ -1,0 +1,90 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Product - {{ product.title }}{% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'assets/css/shop-homepage-style.css' %}">
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+  <!-- Header-->
+        <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 rounded-2" src="{{ product.image }}" alt="..." /></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1 fs-5"><i class="bi-link-45deg me-1"></i>{{ product.product_code }}</div>
+                        <h1 class="">{{ product.title }}</h1>
+                        <div class="fs-5 mb-2">
+                            <span>{{ product.price }} </span>
+                        </div>
+                        {% if product.delivery %}
+                            <span><i class="bi bi-check rounded-circle text-success"></i><span class="text-md">Delivery</span></span>
+                        {% endif %}
+                        
+                        <p class="lead mt-3">
+                            {{ product.sub_title }}
+                        </p>
+                        <div>
+                            <form action="" method="post" class="row">
+                                {% csrf_token %}
+                                <input type="text" value="order" name="type" class="d-none">
+                                <input class="form-control text-center me-3 col" name="quantity" id="quantity" type="number" required value="1" style="max-width: 4rem" />
+                                <div class="btn-group col m-0">
+                                    <button class="btn btn-warning text-dark flex-shrink-0 col" type="submit">
+                                        <i class="bi-cart-fill me-1"></i>
+                                        Order
+                                    </button>
+                                    <a class="btn btn-primary text-light flex-shrink-0 col" href="tel:+263779936807" type="button">
+                                        <i class="bi-telephone me-1"></i>Call Now
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-5">
+                    <h2 class="" align="left">Description</h2>
+
+                    <article class="mb-3">
+                        <script>
+                            let txtarea = document.createElement('textarea');
+                            txtarea.innerHTML = `{{ product.description }}`;
+                            document.querySelector('article').innerHTML = txtarea.textContent;
+                        </script>
+                    </article>
+
+                </div>
+                <div class="row m-2">
+                    <h3 class="my-3 mt-5">Reviews</h3>
+                    
+                    {% for review in reviews %}
+                        <div class="col-md-10 col-lg-8 mx-auto" style="font-size:medium;">
+                            <hr>
+                            <p class="m-0 fw-bold">{{ review.by.username }}</p>
+                            <p class="text-muted m-0">{{ review.post_date }}</p>
+                            <p class="m-0 mx-1 text-justify">{{ review.content }}</p>
+                        </div>
+                    {% endfor %}
+                        
+                    
+                    <div class="col-md-10 col-lg-8 mx-auto text-sm">
+                        <hr>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <h5>Your Review</h5>
+                            <input type="text" value="review" name="type" class="d-none">
+                            <textarea name="content" class="form-control" id="" cols="30" rows="5" placeholder="Type your comment here"></textarea>
+                            <button class="btn btn-primary my-1" type="submit">Send</button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        {% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Complete Order{% endblock title %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row my-5 py-5">
+        <div class="col-md-10 col-lg-8 my-3 py-5">
+            <h1>Your Order has been sent!</h1>
+            <h3 class="text-muted">We will contact you soon.</h3>
+            <table class="table my-2">
+                <tr>
+                    <td>Product Name </td>
+                    <td>: {{product.title}}</td>
+                </tr>
+                <tr>
+                    <td>Quantity </td>
+                    <td>: {{quantity}}</td>
+                </tr>
+                <tr>
+                    <td>Price For Each </td>
+                    <td>: {{ product.price }}</td>
+                </tr>
+                <tr>
+                    <td>By </td>
+                    <td>: {{ request.user.username }} (you)</td>
+                </tr>
+            </table>
+            <p class="fw-light text-sm text-center">Thank you for working with us! </p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

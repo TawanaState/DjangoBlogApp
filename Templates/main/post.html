@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Events{% endblock title %}
+
+
+{% block content %}
+    <header class="masthead" style="background-image:url('{{ page.image }}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto position-relative">
+                    <div class="post-heading">
+                        <h1>{{page.title}}</h1>
+                        <h2 class="subheading">{{ page.sub_title }}</h2><span class="meta">Posted by&nbsp;<a href="#">{{ page.author.username }}</a>&nbsp;{{ page.publish_date }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <script>
+                        let txtarea = document.createElement('textarea');
+                        txtarea.innerHTML = `{{ page.content }}`;
+                        document.querySelector('article .mx-auto').innerHTML = txtarea.textContent;
+                    </script>
+                </div>
+                <hr>
+            </div>
+
+            <div class="row m-2">
+                <h3 class="my-3 mt-5">Comments</h3>
+                
+                {% for comment in comments %}
+                    <div class="col-md-10 col-lg-8 mx-auto text-sm">
+                        <hr>
+                        <p class="m-0 fw-bold">{{ comment.by.username }}</p>
+                        <p class="text-muted m-0">{{ comment.post_date }}</p>
+                        <p class="m-0 mx-1 text-justify">{{ comment.content }}</p>
+                    </div>
+                {% endfor %}
+                    
+                
+                <div class="col-md-10 col-lg-8 mx-auto text-sm">
+                    <hr>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h5>Your comment</h5>
+                        <textarea name="content" class="form-control" id="" cols="30" rows="5" placeholder="Type your comment here"></textarea>
+                        <button class="btn btn-primary my-1" type="submit">Send</button>
+                    </form>
+                </div>
+                
+            </div>
+            <hr class="my-5">
+        </div>
+    </article>
+
+    {% endblock content %}

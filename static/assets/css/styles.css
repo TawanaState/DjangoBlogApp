@@ -1,0 +1,55 @@
+body{
+    font-family: var(--bs-body-font-family)!important;
+}
+.text-sm{
+    font-size: small;
+}
+.text-md{
+    font-size: medium;
+}
+.field:has(input:focus) p, .field:has(input:focus) li{
+    display: block;
+}
+.field p, .field li{
+    display: none;
+    font-size: small;
+    margin: 0px;
+    color: rgb(145, 145, 255);
+}
+.field > label{
+    width: 100%;
+    text-align: left;
+    font-size: small;
+    flood-color: gray;
+}
+input{
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    outline: none;
+}
+.post-preview .bg-img{
+    height: 40vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background: no-repeat center center;
+    background-color: #6c757d;
+    background-attachment: scroll;
+    background-size: cover;
+    border-radius: 10px;
+}
+nav > *{
+    color: #212529!important;
+}

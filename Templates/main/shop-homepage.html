@@ -1,0 +1,71 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Events{% endblock title %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static 'assets/css/shop-homepage-style.css' %}">
+{% endblock stylesheets %}
+
+
+
+{% block content %}
+  <!-- Header-->
+  <header class="masthead" style="background-image:url('/static/assets/img/home-bg.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto position-relative">
+                <div class="site-heading">
+                    <h1>Shop In Style</h1><span class="subheading">Our products</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+  <!-- Section-->
+  <section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        
+        {% for product in products %}
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              
+              {% if product.delivery %}
+                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                  Delivery
+                </div>
+              {% endif %}
+                
+              
+              <!-- Product image-->
+              <img class="card-img-top" src="{{ product.image }}" alt="{{ product.title }}" />
+              <!-- Product details-->
+              <div class="card-body p-2">
+                <div class="text-center m-0">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder m-0">{{ product.title }} </h5>
+                  <!-- Product price-->
+                  {{ product.price }}
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
+                <div class="text-center m-0">
+                  <a class="btn btn-outline-dark m-1 p-2 px-3 mt-0" href="{% url 'product' product.id %}">View</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+          
+        
+
+      </div>
+    </div>
+  </section>
+  {% endblock content %}
